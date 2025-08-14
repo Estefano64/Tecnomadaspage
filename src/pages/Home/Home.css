@@ -18,20 +18,22 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, #e63946, #d63031);
-  background-image: 
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,0 1000,1000"/></svg>'),
-    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  
+  /* La imagen de fondo se establece desde JavaScript usando imports */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Efecto parallax */
 }
 
+/* Overlay adicional para mejor contraste */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3); /* Overlay oscuro adicional */
 }
 
 .hero-content {
@@ -47,20 +49,20 @@
   font-weight: 700;
   margin-bottom: 20px;
   line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
 }
 
 .hero-title .highlight {
   color: #ffd60a;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .hero-subtitle {
   font-size: 1.2rem;
   margin-bottom: 40px;
-  opacity: 0.9;
+  opacity: 0.95;
   line-height: 1.6;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Mejor legibilidad */
 }
 
 /* Buscador principal */
@@ -273,9 +275,22 @@
 }
 
 .property-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.price-pen {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--primary-color);
+}
+
+.price-usd {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #28a745;
+  margin-top: 0.25rem;
 }
 
 .property-whatsapp {
@@ -287,6 +302,17 @@
   justify-content: center;
   font-size: 18px;
   padding: 0;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.property-whatsapp svg {
+  display: block;
+}
+
+.property-whatsapp:hover {
+  transform: scale(1.1);
 }
 
 .section-footer {
@@ -380,6 +406,10 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .hero-background {
+    background-attachment: scroll; /* Disable parallax on mobile for better performance */
+  }
+
   .hero-title {
     font-size: 2.5rem;
   }

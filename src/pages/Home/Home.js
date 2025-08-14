@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { getPropiedades } from '../../services/propiedades';
 import { getModalActivo } from '../../services/modal';
 import Modal from '../../components/Modal/Modal';
+import heroBackground from '../../assets/hero-background.jpg';
 import './Home.css';
 
 const Home = () => {
@@ -49,7 +50,7 @@ const Home = () => {
         // Mostrar el modal después de un pequeño delay para que se cargue la página
         setTimeout(() => {
           setMostrarModal(true);
-        }, 1500);
+        }, 1000);
       }
     } catch (error) {
       console.error('Error cargando modal:', error);
@@ -88,6 +89,14 @@ const Home = () => {
     }).format(precio);
   };
 
+  const formatearPrecioUSD = (precio) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0
+    }).format(precio);
+  };
+
   const handleWhatsApp = (propiedad) => {
     const phone = "51925803372";
     const message = `Hola, me interesa la propiedad: ${propiedad.titulo} - ${formatearPrecio(propiedad.precio)}`;
@@ -99,7 +108,12 @@ const Home = () => {
     <div className="home">
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-background">
+        <div 
+          className="hero-background" 
+          style={{
+            backgroundImage: `linear-gradient(rgba(230, 57, 70, 0.8), rgba(214, 48, 49, 0.8)), url(${heroBackground})`
+          }}
+        >
           <div className="hero-overlay"></div>
         </div>
         <div className="container">
@@ -244,14 +258,18 @@ const Home = () => {
 
                     <div className="property-footer">
                       <div className="property-price">
-                        {formatearPrecio(propiedad.precio)}
+                        <div className="price-pen">{formatearPrecio(propiedad.precio)}</div>
+                        {propiedad.precio_usd && (
+                          <div className="price-usd">{formatearPrecioUSD(propiedad.precio_usd)}</div>
+                        )}
                       </div>
                       <button 
                         onClick={() => handleWhatsApp(propiedad)}
                         className="btn btn-whatsapp property-whatsapp"
                         aria-label="Contactar por WhatsApp"
+                        title="Contactar por WhatsApp"
                       >
-                        <FaWhatsapp />
+                        <FaWhatsapp size={18} />
                       </button>
                     </div>
                   </div>
@@ -322,7 +340,7 @@ const Home = () => {
                 onClick={() => handleWhatsApp({ titulo: 'consulta general', precio: '' })}
                 className="btn btn-whatsapp"
               >
-                <FaWhatsapp />
+                <FaWhatsapp size={18} />
                 WhatsApp
               </button>
             </div>
