@@ -1,0 +1,341 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #e63946 0%, #d63031 100%);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled {
+  background: rgba(230, 57, 70, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  min-height: 70px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  overflow: hidden; /* Para que la imagen se recorte correctamente */
+  padding: 4px; /* Un poco de espacio interior */
+}
+
+/* Estilos para el logo personalizado */
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Mantiene las proporciones sin deformar */
+  object-position: center;
+  transition: all 0.3s ease;
+  filter: brightness(1.1) contrast(1.05); /* Mejora el contraste */
+}
+
+/* Efecto hover en la imagen */
+.logo:hover .logo-image {
+  transform: scale(1.1);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.logo-subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+/* Navegación Desktop */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+}
+
+/* Acciones del header */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-whatsapp,
+.header-phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.header-whatsapp {
+  background: #25d366;
+  border: none;
+}
+
+.header-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+}
+
+.header-phone {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.header-phone:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Botón menú móvil */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Navegación móvil */
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background: rgba(214, 48, 49, 0.98);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.nav-mobile.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-mobile .nav-link {
+  padding: 15px 20px;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-mobile .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.nav-mobile .nav-link.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-left: 4px solid white;
+}
+
+.nav-mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+}
+
+.nav-mobile-actions .btn {
+  justify-content: center;
+  width: 100%;
+}
+
+/* Overlay del menú */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-mobile {
+    display: flex;
+  }
+
+  .header-actions .btn-text {
+    display: none;
+  }
+
+  .header-whatsapp,
+  .header-phone {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 10px 0;
+    min-height: 60px;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .header-phone {
+    display: none;
+  }
+
+  .logo-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 16px;
+  }
+}
+
+/* Animaciones adicionales */
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.nav-mobile.open {
+  animation: slideInDown 0.3s ease-out;
+}
+
+/* Estados de focus para accesibilidad */
+.nav-link:focus-visible,
+.menu-toggle:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+/* Corrección para el ícono del teléfono */
+.header-phone svg,
+.nav-mobile-actions .btn svg {
+  transform: scaleX(-1); /* Voltea horizontalmente el ícono */
+}
+
+/* Alternativa: usar rotación si scaleX no funciona bien */
+.phone-icon-fixed {
+  transform: rotate(0deg) scaleX(-1);
+  display: inline-block;
+}
+
+/* Si quieres una animación suave cuando haces hover */
+.header-phone:hover svg,
+.nav-mobile-actions .btn:hover svg {
+  transform: scaleX(-1) scale(1.1);
+  transition: transform 0.2s ease;
+}
